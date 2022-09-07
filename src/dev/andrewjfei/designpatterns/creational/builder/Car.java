@@ -10,7 +10,7 @@ public class Car {
         return new CarBuilder();
     }
 
-    public Car(String make, String model, String type, String colour) {
+    private Car(String make, String model, String type, String colour) {
         this.make = make;
         this.model = model;
         this.type = type;
@@ -57,5 +57,40 @@ public class Car {
                 ", type='" + type + '\'' +
                 ", colour='" + colour + '\'' +
                 '}';
+    }
+
+    // Builder
+    public static class CarBuilder implements Builder<Car> {
+        private String make;
+        private String model;
+        private String type;
+        private String colour;
+
+        public CarBuilder() {}
+
+        public CarBuilder make(String make) {
+            this.make = make;
+            return this;
+        }
+
+        public CarBuilder model(String model) {
+            this.model = model;
+            return this;
+        }
+
+        public CarBuilder type(String type) {
+            this.type = type;
+            return this;
+        }
+
+        public CarBuilder colour(String colour) {
+            this.colour = colour;
+            return this;
+        }
+
+        @Override
+        public Car build() {
+            return new Car(make, model, type, colour);
+        }
     }
 }
